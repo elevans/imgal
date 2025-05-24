@@ -1,3 +1,5 @@
+use numpy::ndarray::ArrayView3;
+use numpy::{IntoPyArray, PyArray3, PyReadonlyArray3};
 use pyo3::prelude::*;
 
 use imgal_core::integrate;
@@ -41,6 +43,24 @@ pub fn py_fn_parameters_abbe_diffraction_limit(wavelength: f64, na: f64) -> f64 
 #[pyo3(name = "omega")]
 pub fn py_fn_parameters_omega(period: f64) -> f64 {
     parameters::omega(period)
+}
+
+/// Python binding for phasor::time_domain::image.
+#[pyfunction]
+#[pyo3(name = "image")]
+#[pyo3(signature = (i_data, period, harmonic=None, omega=None))]
+pub fn py_fn_phasor_time_domain_image<'py>(
+    py: Python<'py>,
+    i_data: PyReadonlyArray3<f64>,
+    period: f64,
+    harmonic: Option<f64>,
+    omega: Option<f64>,
+) -> PyResult<Bound<'py, PyArray3<f64>>> {
+    // convert PyArray to rust ndarray
+    let data: ArrayView3<f64> = i_data.as_array();
+    //TODO I might be able to use the ArrayView as a reference
+    let result = phasor::time_domain::image(&data.to_owned(), period, harmonic, omega);
+    Ok(result.into_pyarray(py))
 }
 
 /// Python binding for phasor::time_domain::imaginary.
