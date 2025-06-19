@@ -3,7 +3,11 @@ use pyo3::prelude::*;
 
 use imgal_core::phasor;
 
-/// Python binding for phasor::time_domain::image.
+/// Compute the real and imaginary (G, S) coordinates of a 3-dimensional decay
+/// image.
+///
+/// description
+///
 #[pyfunction]
 #[pyo3(name = "image")]
 #[pyo3(signature = (i_data, period, harmonic=None, omega=None, axis=None))]

@@ -11,7 +11,7 @@ use crate::traits::numeric::ToFloat64;
 ///
 /// # Description
 ///
-/// S = ∫(I(t) * sin(nωt) * dt) / ∫(I(t) * dt)
+/// S = ∫(I(t) * sin(nωt) * dt) / ∫(I(t) * dt)\
 /// G = ∫(I(t) * cos(nωt) * dt) / ∫(I(t) * dt)
 ///
 /// # Arguments
