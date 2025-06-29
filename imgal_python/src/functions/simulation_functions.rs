@@ -62,3 +62,17 @@ pub fn decay_fluorescence_decay_3d(
         simulation::decay::fluorescence_decay_3d(samples, period, tau, initial_value, shape);
     Ok(output.into_pyarray(py))
 }
+
+/// Gaussian 1-D IRF
+#[pyfunction]
+#[pyo3(name = "gaussian_irf_1d")]
+pub fn instrument_gaussian_irf_1d(
+    py: Python,
+    bins: usize,
+    time_range: f64,
+    irf_width: f64,
+    irf_center: f64,
+) -> PyResult<Bound<PyArray1<f64>>> {
+    let output = simulation::instrument::gaussian_irf_1d(bins, time_range, irf_width, irf_center);
+    Ok(output.into_pyarray(py))
+}

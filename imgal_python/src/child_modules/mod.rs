@@ -1,3 +1,4 @@
+pub mod distribution_module;
 pub mod integration_module;
 pub mod parameters_module;
 pub mod phasor_module;

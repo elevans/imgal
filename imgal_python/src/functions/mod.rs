@@ -1,3 +1,4 @@
+pub mod distribution_functions;
 pub mod integration_functions;
 pub mod parameters_functions;
 pub mod phasor_functions;
